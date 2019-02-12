@@ -109,7 +109,7 @@ export class Animated extends React.Component {
   }
 
   render() {
-    const {children, style, isVisible, innerRef, className} = this.props;
+    const {children, style, isVisible, innerRef, className, onAnimationEnd} = this.props;
     const {animation, delay} = this.state;
 
     const classes = classNames("animated", animation, className);
@@ -127,6 +127,7 @@ export class Animated extends React.Component {
           pointerEvents: isVisible ? "all" : "none",
           ...style
         }}
+        onAnimationEnd={onAnimationEnd}
       >
         {children}
       </div>
@@ -145,7 +146,8 @@ Animated.propTypes = {
   isVisible: bool,
   innerRef: func,
   className: string,
-  animateOnMount: bool
+  animateOnMount: bool,
+  onAnimationEnd: func,
 };
 
 Animated.defaultProps = {
@@ -156,5 +158,6 @@ Animated.defaultProps = {
   animationOutDelay: 0,
   isVisible: true,
   style: {},
-  animateOnMount: true
+  animateOnMount: true,
+  onAnimationEnd: function() {},
 };
